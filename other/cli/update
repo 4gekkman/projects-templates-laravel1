@@ -187,7 +187,7 @@ func_wrapper_update () {
 
   # 9. Запустить проект, если не была передана опция -n
   if [ "$is_up_after_update" = 1 ]; then
-    . app up -c $cogfigs_group
+    . app up -c "$cogfigs_group"
   fi
 
 :;}
