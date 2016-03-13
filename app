@@ -97,10 +97,6 @@ func_wrapper_app () {
           . other/cli/help up
           return
           ;;
-        *) 
-          # Ничего не делать 
-          return
-          ;;
       esac
     done
 
