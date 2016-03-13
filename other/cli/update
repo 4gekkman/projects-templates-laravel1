@@ -13,6 +13,8 @@
   5. Получить URL репозитория проекта, проверить его
   6. Проверить существование .gitignore в корне проекта
   7. Скачать новые файлы проекта, заменить ими старые
+  8. Сообщить об успешном обновлении
+  9. Запустить проект, если не была передана опция -n
 
 '
 #########################################################################
@@ -134,58 +136,60 @@ func_wrapper_update () {
   # 7. Скачать новые файлы проекта, заменить ими старые
   {
 
-    # 7.1. Создать временный каталог, скопировать в него файлы
-    mkdir tmp4git
-    git clone $url tmp4git
+    # 7.1. Удалить каталог tmp4git, если он есть
+    if [ -d tmp4git ]; then
+      echo -en "$YELLOW --- app update ---> Удаляю старый каталог tmp4git... $NORMAL"
+      sudo rm -rf tmp4git
+      echo -e "$GREEN Успех! $NORMAL"
+    fi
 
-    
+    # 7.2. Создать временный каталог, скопировать в него файлы
+    echo -en "$YELLOW --- app update ---> Копирую свежие файлы проекта из удалённого репозитория во временный каталог tmp4git... $NORMAL"
+    mkdir -p tmp4git
+    git clone $url tmp4git
+    echo -e "$GREEN Успех! $NORMAL"
+
+    # 7.3. Удалить из tmp4git все указанные в tmp4git/.gitignore файлы/каталоги
+    while read line; do 
+      
+      # Удалить файл/каталог tmp4git/$line, если такой есть
+      if [ -f "tmp4git/$line" ] || [ -d "tmp4git/$line" ]; then
+        
+        # Если $line не пуста
+        if [ -n "$line" ]; then
+          echo "tmp4git/$line"
+          sudo rm -rf "tmp4git/$line"
+        fi
+      
+      fi
+
+    done < tmp4git/.gitignore
+
+    # 7.4. Скопировать всё с заменой из tmp4git в корень проекта
+    echo -en "$YELLOW --- app update ---> Копирую все с заменой из tmp4git в корень проекта... $NORMAL"
+    cp -rf tmp4git/. .
+    echo -e "$GREEN Успех! $NORMAL"
+
+    # 7.5. Удалить каталог tmp4git
+    if [ -d tmp4git ]; then
+      echo -en "$YELLOW --- app update ---> Удаляю каталог tmp4git... $NORMAL"
+      sudo rm -rf tmp4git
+      echo -e "$GREEN Успех! $NORMAL"
+    fi
 
   } || {
     echo -e "$RED--- app update ---> Ошибка! Cм.строку $LINENO скрипта $BASH_SOURCE$NORMAL"
     return
   }
 
+  # 8. Сообщить об успешном обновлении
+  echo -e "$GREEN--- app update ---> Проект успешно обновлён!$NORMAL"
 
-
-
+  # 9. Запустить проект, если не была передана опция -n
+  if [ "$is_up_after_update" == 1 ]; then
+    . app up -c $cogfigs_group
+  fi
 
 :;}
 func_wrapper_update "$@"
-
-
-
-
-
-
-
-# #########################################################
-# #                                                       #
-# # Остановить приложение, обновить все образы, запустить #
-# #                                                       #
-# #########################################################
-
-#   # 1] Подключить алиасы
-#   . aliases
-  
-#   # 2] Остановить проект, удалить контейнеры
-#   . down
-#   docker-compose stop
-#   docker-compose rm
-
-#   # 3] Если есть флаг --update-files, обновить файлы проекта кроме data
-#   if [[ $1 == "--update-files" ]] || [[ $2 == "--update-files" ]] 
-#   then
-    
-#     rm tmp4git
-#     mkdir tmp4git
-#     git clone https://github.com/4gekkman/projects-devapp tmp4git
-#     rm -rf rmp4git/data
-#     cp -rf tmp4git/. .
-#     rm -rf tmp4git
-
-#   fi  
-  
-#   # 4] Запустить проект
-#   . up $@
-
 
