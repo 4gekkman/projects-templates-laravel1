@@ -2,7 +2,7 @@
 .idea
 docker-compose.yml
 supervisord.*
-other/logs
-data
-configs/active
+other/logs/*
+data/*
+configs/active/*
 
