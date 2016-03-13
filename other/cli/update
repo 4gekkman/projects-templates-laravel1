@@ -135,10 +135,10 @@ func_wrapper_update () {
   {
 
     # 7.1. Создать временный каталог, скопировать в него файлы
-    # mkdir tmp4git
-    # git clone https://github.com/4gekkman/projects-devapp tmp4git
+    mkdir tmp4git
+    git clone $url tmp4git
 
-    :
+    
 
   } || {
     echo -e "$RED--- app update ---> Ошибка! Cм.строку $LINENO скрипта $BASH_SOURCE$NORMAL"
