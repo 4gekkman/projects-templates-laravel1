@@ -1,0 +1,29 @@
+#!/bin/bash
+#####################
+##     aliases     ##
+##############################################################################
+## Создать в среде окружении шелла функции-хелперы для работы с приложением ##
+##############################################################################
+: '
+ 
+  a. Подключить конфиг CLI-приложения
+
+  1. Включить expanding алиасов в скрипте
+  2. Определить алиасы
+ 
+'
+#########################################################################
+
+# 1. Включить expanding алиасов в скрипте
+shopt -s expand_aliases
+
+# 2. Определить алиасы
+alias node='function f(){   docker-compose run node node "$@";  };f'
+alias npm='function f(){   docker-compose run node npm "$@";  };f'
+alias gulp='function f(){   docker-compose run node gulp "$@";  };f'
+alias bower='function f(){   docker-compose run node bower --allow-root "$@" ;  };f'
+alias php='function f(){   docker-compose run nginx php "$@";  };f'
+alias artisan='function f(){   docker-compose run nginx php artisan "$@"; };f'
+alias composer='function f(){   docker-compose run nginx composer "$@"; };f'
+
+
