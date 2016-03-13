@@ -11,7 +11,8 @@
   3. Скопировать файл configs/groups/$cogfigs_group/laravel/.env в project/.env
   4. Скопировать файл configs/groups/$cogfigs_group/docker-compose/docker-compose.yml в docker-compose.yml
   5. Произвести простановку путей в ряде файлов
-  6. Запустить проект
+  6. Добавить в .gitignore запись "data/*", если таковой нет
+  7. Запустить проект
 
 '
 #########################################################################
@@ -131,12 +132,42 @@ func_wrapper_up () {
       return
     }  
  
-  # 6. Запустить проект
+  # 6. Добавить в .gitignore запись "data/*", если таковой нет
 
-    # 6.1. Сообщить
+    # 6.1. Проверить существование .gitignore в корне проекта
+    echo -ne "$YELLOW--- app up ---> Проверяю существование необходимого файла .gitignore в корне проекта...$NORMAL"
+    if [ -f .gitignore ]
+      then 
+        echo -e "$GREEN Существует! $NORMAL"
+      else 
+        echo -e "$RED Не существует! Завершаю. $NORMAL"
+        return
+    fi
+
+    # 6.2. Подготовим переменную отражающую наличие записи "data/*"
+    is_data_in_gitignore=0
+
+    # 6.3. Проверим наличие записи
+    while read line; do 
+      
+      if [ "$line" = "data/*" ]; then
+        is_data_in_gitignore=1
+        break;
+      fi
+
+    done < .gitignore
+
+    # 6.4. Если записи нет, добавить её в конец файла
+    if [ "$is_data_in_gitignore" = 0 ]; then
+      echo "data/*" >> .gitignore
+    fi
+
+  # 7. Запустить проект
+
+    # 7.1. Сообщить
     echo -e "$YELLOW--- app up ---> Начинаю запуск проекта...$NORMAL"    
 
-    # 6.2. Запустить
+    # 7.2. Запустить
     {
       docker-compose pull
       docker-compose up -d      
@@ -145,7 +176,7 @@ func_wrapper_up () {
       return
     }
 
-    # 6.3. Сообщить об успешном запуске
+    # 7.3. Сообщить об успешном запуске
     echo -e "$GREEN--- app up ---> Проект успешно запущен!$NORMAL"
 
 :;}
