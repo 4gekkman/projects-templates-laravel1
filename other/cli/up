@@ -159,6 +159,7 @@ func_wrapper_up () {
 
     # 6.4. Если записи нет, добавить её в конец файла
     if [ "$is_data_in_gitignore" = 0 ]; then
+      echo "$YELLOW--- app up ---> В .gitignore отсутствует запись 'data/*', создаю её. Она необходима, чтобы данные проекта (базы mysql, данные redis, и т.д.) не заливались в репозиторий проекта на github. $NORMAL"
       echo "data/*" >> .gitignore
     fi
 
