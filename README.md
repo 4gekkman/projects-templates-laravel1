@@ -1,4 +1,4 @@
-# Project - devapp
+# Шаблон проектов projects-templates-laravel1
 ---
 ## Оглавление
 
