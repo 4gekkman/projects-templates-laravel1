@@ -13,7 +13,7 @@
 #########################################################################
 
 # 1. URL GitHub-репозитория проекта 
-project_github_url="https://github.com/4gekkman/projects-templates-laravel1"
+project_github_url=""
 
 # 2. Группа конфигов для запуска приложения по умолчанию
 cogfigs_group_default="dev"

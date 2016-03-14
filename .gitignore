@@ -4,3 +4,4 @@ docker-compose.yml
 supervisord.*
 other/logs/*
 configs/active/*
+data/*
