@@ -34,8 +34,8 @@ echo "----------------------------"
   echo -e "$YELLOW -- npm [docker-compose run --rm node npm "$@"] $NORMAL"
   
   # 3.3. gulp
-  alias gulp='function f(){   docker-compose run --rm -p 3010:3010 -p 3011:3011 node gulp "$@";  };f'
-  echo -e "$YELLOW -- gulp [docker-compose run --rm -p 3010:3010 -p 3011:3011 node gulp "$@"] $NORMAL"
+  alias gulp='function f(){   docker-compose run --rm -p 3000:3000 -p 3001:3001 node gulp "$@";  };f'
+  echo -e "$YELLOW -- gulp [docker-compose run --rm -p 3000:3000 -p 3001:3001 node gulp "$@"] $NORMAL"
   
   # 3.4. bower
   alias bower='function f(){   docker-compose run --rm node bower --allow-root "$@";  };f'
