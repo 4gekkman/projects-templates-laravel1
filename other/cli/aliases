@@ -26,32 +26,32 @@ echo -e "$YELLOWНачинаю добавление алиасов в окруш
 echo "----------------------------"
 
   # 3.1. node
-  alias node='function f(){   docker-compose run --rm --service-ports node node "$@";  };f'
-  echo -e "$YELLOW -- node [docker-compose run --rm --service-ports node node "$@"] $NORMAL"
+  alias node='function f(){   docker-compose run --rm node node "$@";  };f'
+  echo -e "$YELLOW -- node [docker-compose run --rm node node "$@"] $NORMAL"
   
   # 3.2. npm
-  alias npm='function f(){   docker-compose run --rm --service-ports node npm "$@";  };f'
-  echo -e "$YELLOW -- npm [docker-compose run --rm --service-ports node npm "$@"] $NORMAL"
+  alias npm='function f(){   docker-compose run --rm node npm "$@";  };f'
+  echo -e "$YELLOW -- npm [docker-compose run --rm node npm "$@"] $NORMAL"
   
   # 3.3. gulp
-  alias gulp='function f(){   docker-compose run --rm --service-ports node gulp "$@";  };f'
-  echo -e "$YELLOW -- gulp [docker-compose run --rm --service-ports node gulp "$@"] $NORMAL"
+  alias gulp='function f(){   docker-compose run --rm -p 3010:3010 -p 3011:3011 node gulp "$@";  };f'
+  echo -e "$YELLOW -- gulp [docker-compose run --rm -p 3010:3010 -p 3011:3011 node gulp "$@"] $NORMAL"
   
   # 3.4. bower
-  alias bower='function f(){   docker-compose run --rm --service-ports node bower --allow-root "$@";  };f'
-  echo -e "$YELLOW -- bower [docker-compose run --rm --service-ports node bower --allow-root "$@"] $NORMAL"
+  alias bower='function f(){   docker-compose run --rm node bower --allow-root "$@";  };f'
+  echo -e "$YELLOW -- bower [docker-compose run --rm node bower --allow-root "$@"] $NORMAL"
   
   # 3.5. php
-  alias php='function f(){   docker-compose run --rm --service-ports nginx php "$@";  };f'
-  echo -e "$YELLOW -- php [docker-compose run --rm --service-ports nginx php "$@"] $NORMAL"
+  alias php='function f(){   docker-compose run --rm nginx php "$@";  };f'
+  echo -e "$YELLOW -- php [docker-compose run --rm nginx php "$@"] $NORMAL"
   
   # 3.6. artisan
-  alias artisan='function f(){   docker-compose --rm --service-ports run nginx php artisan "$@"; };f'
-  echo -e "$YELLOW -- artisan [docker-compose --rm --service-ports run nginx php artisan "$@"] $NORMAL"
+  alias artisan='function f(){   docker-compose --rm run nginx php artisan "$@"; };f'
+  echo -e "$YELLOW -- artisan [docker-compose --rm run nginx php artisan "$@"] $NORMAL"
   
   # 3.7. composer
-  alias composer='function f(){   docker-compose --rm --service-ports run nginx composer "$@"; };f' 
-  echo -e "$YELLOW -- composer [docker-compose --rm --service-ports run nginx composer "$@"] $NORMAL"
+  alias composer='function f(){   docker-compose --rm run nginx composer "$@"; };f' 
+  echo -e "$YELLOW -- composer [docker-compose --rm run nginx composer "$@"] $NORMAL"
   
 echo "----------------------------"  
   
