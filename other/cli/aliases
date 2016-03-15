@@ -23,6 +23,7 @@ shopt -s expand_aliases
 echo -e "$YELLOW Начинаю добавление алиасов в окрушение текущего шелла... $NORMAL"
 
 # 3. Определить алиасы
+echo "----------------------------"
 
   # 3.1. node
   alias node='function f(){   docker-compose run --rm --service-ports node node "$@";  };f'
@@ -51,6 +52,8 @@ echo -e "$YELLOW Начинаю добавление алиасов в окру�
   # 3.7. composer
   alias composer='function f(){   docker-compose --rm --service-ports run nginx composer "$@"; };f' 
   echo -e "$YELLOW -- composer [docker-compose --rm --service-ports run nginx composer "$@"] $NORMAL"
+  
+echo "----------------------------"  
   
 # 4. Сообщить о конце назначения алиасов
 echo -e "$GREEN Добавление алиасов успешно завершено! $NORMAL"

@@ -79,7 +79,7 @@ func_wrapper_app () {
     done
 
     # 4.2. Выполнить скрипт aliases
-    . other/cli/aliases
+    # . other/cli/aliases
 
     # 4.3. Завершить
     return    
