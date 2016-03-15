@@ -68,7 +68,7 @@ func_wrapper_app () {
       case $opt in
         h)  
           # Показать справку для команды aliases
-          . other/cli/help aliases  
+          # . other/cli/help aliases  
           return
           ;;
         *) 
