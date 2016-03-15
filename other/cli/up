@@ -108,7 +108,7 @@ func_wrapper_up () {
     {
       
       # 1] Проставить пути в docker-compose.yml
-      echo -en "$YELLOW--- app up ---> docker-compose.yml ...$NORMAL"
+      echo -en "$YELLOW--- app up ---> -- docker-compose.yml ...$NORMAL"
       sed -i -e "s#<path_to_the_project>#$project_path#g" docker-compose.yml
       echo -e "$GREEN Успех! $NORMAL"
 
