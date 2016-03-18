@@ -46,12 +46,12 @@ echo "----------------------------"
   echo -e "$YELLOW -- php [docker-compose run --rm nginx php "$@"] $NORMAL"
   
   # 3.6. artisan
-  alias artisan='function f(){   docker-compose -T --rm run nginx php artisan "$@"; };f'
-  echo -e "$YELLOW -- artisan [docker-compose -T --rm run nginx php artisan "$@"] $NORMAL"
+  alias artisan='function f(){   docker-compose run --rm nginx php artisan "$@"; };f'
+  echo -e "$YELLOW -- artisan [docker-compose run --rm nginx php artisan "$@"] $NORMAL"
   
   # 3.7. composer
-  alias composer='function f(){   docker-compose --rm run nginx composer "$@"; };f' 
-  echo -e "$YELLOW -- composer [docker-compose --rm run nginx composer "$@"] $NORMAL"
+  alias composer='function f(){   docker-compose run --rm nginx composer "$@"; };f' 
+  echo -e "$YELLOW -- composer [docker-compose run --rm nginx composer "$@"] $NORMAL"
   
 echo "----------------------------"  
   
