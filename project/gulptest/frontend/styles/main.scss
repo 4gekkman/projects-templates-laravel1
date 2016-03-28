@@ -1,0 +1,9 @@
+@import "header.scss";
+
+$color: #a0a;
+.test {
+  border-color: $color;
+  color: darken($color, 8%);
+  width: 100px;
+  font-size: 150px;
+}

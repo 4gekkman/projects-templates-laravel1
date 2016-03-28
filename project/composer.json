@@ -7,16 +7,7 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "predis/predis": "^1.0",
-        
-        "4gekkman/M1": "~1.0",
-        "4gekkman/M2": "~1.0",
-        "4gekkman/M3": "~1.0",
-        "4gekkman/M4": "~1.0",
-        "4gekkman/M5": "~1.0",
-        "4gekkman/R1": "~1.0",
-        "4gekkman/R2": "~1.0",
-        "4gekkman/R4": "~1.0"
+        "predis/predis": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -25,6 +16,7 @@
         "symfony/css-selector": "2.8.*|3.0.*",
         "symfony/dom-crawler": "2.8.*|3.0.*",
 
+        "predis/predis": "~1.0",
         "matthiasmullie/minify": "~1.0",
         "composer/semver": "~1.0", 
 
@@ -35,7 +27,16 @@
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"          
+            "App\\": "app/",
+            "M1\\": "vendor/4gekkman/M1",
+            "M2\\": "vendor/4gekkman/M2",
+            "M3\\": "vendor/4gekkman/M3",
+            "M4\\": "vendor/4gekkman/M4",
+            "M5\\": "vendor/4gekkman/M5",
+            "R1\\": "vendor/4gekkman/R1",
+            "R2\\": "vendor/4gekkman/R2",
+            "R3\\": "vendor/4gekkman/R3",
+            "R4\\": "vendor/4gekkman/R4"            
         }
     },
     "autoload-dev": {
