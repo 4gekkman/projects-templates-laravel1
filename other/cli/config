@@ -13,10 +13,10 @@
 #########################################################################
 
 # 1. URL GitHub-репозитория проекта 
-project_github_url=""
+project_github_url="https://github.com/4gekkman/projects-devapp"
 
 # 2. Группа конфигов для запуска приложения по умолчанию
-cogfigs_group_default="dev"
+configs_group_default="dev"
 
 
 

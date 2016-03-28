@@ -7,9 +7,9 @@
 : '
   
   1. Определить название группы конфигов для запуска приложения
-  2. Скопировать configs/groups/$cogfigs_group/environment в configs/active
-  3. Скопировать файл configs/groups/$cogfigs_group/laravel/.env в project/.env
-  4. Скопировать файл configs/groups/$cogfigs_group/docker-compose/docker-compose.yml в docker-compose.yml
+  2. Скопировать configs/groups/$configs_group/environment в configs/active
+  3. Скопировать файл configs/groups/$configs_group/laravel/.env в project/.env
+  4. Скопировать файл configs/groups/$configs_group/docker-compose/docker-compose.yml в docker-compose.yml
   5. Произвести простановку путей в ряде файлов
   6. Добавить в .gitignore запись "data/*", если таковой нет
   7. Запустить проект
@@ -22,7 +22,7 @@ func_wrapper_up () {
   # - Которую надо будет применить для запуска приложения
 
     # 1.1. Подготовить значение по умолчанию
-    cogfigs_group=$cogfigs_group_default
+    configs_group=$configs_group_default
 
     # 1.2. Если команде up переданы какие-то опции
     if [ $# != 0 ]; then
@@ -38,9 +38,9 @@ func_wrapper_up () {
             # - Значение опции -c не пусто
             # - Существует группа опций с таким именем
             # То:
-            # - Записать это значение в $cogfigs_group
+            # - Записать это значение в $configs_group
             if [ -n "$OPTARG" ] && [ -d "$PWD/configs/groups/$OPTARG" ]; then
-              cogfigs_group=$OPTARG
+              configs_group=$OPTARG
             fi
             ;;
         esac
@@ -48,14 +48,14 @@ func_wrapper_up () {
 
     fi
 
-  # 2. Скопировать configs/groups/$cogfigs_group/environment в configs/active
+  # 2. Скопировать configs/groups/$configs_group/environment в configs/active
   
     # 2.1. Сообщить
-    echo -en "$YELLOW--- app up ---> Копирую конфиги из группы $cogfigs_group в configs/active ...$NORMAL"
+    echo -en "$YELLOW--- app up ---> Копирую конфиги из группы $configs_group в configs/active ...$NORMAL"
 
     # 2.2. Скопировать
     {
-      sudo cp -rf configs/groups/$cogfigs_group/environment/* configs/active/
+      sudo cp -rf configs/groups/$configs_group/environment/* configs/active/
     } || {
       echo -e "$RED--- app up ---> Ошибка! Cм.строку $LINENO скрипта $BASH_SOURCE$NORMAL"
       return
@@ -64,14 +64,14 @@ func_wrapper_up () {
     # 2.3. Сообщить об успехе
     echo -e "$GREEN Успех! $NORMAL"    
 
-  # 3. Скопировать файл configs/groups/$cogfigs_group/laravel/.env в project/.env  
+  # 3. Скопировать файл configs/groups/$configs_group/laravel/.env в project/.env  
 
     # 3.1. Сообщить
-    echo -en "$YELLOW--- app up ---> Копирую файл configs/groups/$cogfigs_group/laravel/.env в project/.env ...$NORMAL"
+    echo -en "$YELLOW--- app up ---> Копирую файл configs/groups/$configs_group/laravel/.env в project/.env ...$NORMAL"
 
     # 3.2. Скопировать
     {
-      sudo cp -f configs/groups/$cogfigs_group/laravel/.env project/.env
+      sudo cp -f configs/groups/$configs_group/laravel/.env project/.env
     } || {
       echo -e "$RED--- app up ---> Ошибка! Cм.строку $LINENO скрипта $BASH_SOURCE$NORMAL"
       return
@@ -80,14 +80,14 @@ func_wrapper_up () {
     # 3.3. Сообщить об успехе
     echo -e "$GREEN Успех! $NORMAL"    
 
-  # 4. Скопировать файл configs/groups/$cogfigs_group/docker-compose/docker-compose.yml в docker-compose.yml
+  # 4. Скопировать файл configs/groups/$configs_group/docker-compose/docker-compose.yml в docker-compose.yml
 
     # 4.1. Сообщить
-    echo -en "$YELLOW--- app up ---> Копирую файл configs/groups/$cogfigs_group/docker-compose/docker-compose.yml в docker-compose.yml ...$NORMAL"
+    echo -en "$YELLOW--- app up ---> Копирую файл configs/groups/$configs_group/docker-compose/docker-compose.yml в docker-compose.yml ...$NORMAL"
 
     # 4.2. Скопировать
     {
-      sudo cp -f configs/groups/$cogfigs_group/docker-compose/docker-compose.yml docker-compose.yml
+      sudo cp -f configs/groups/$configs_group/docker-compose/docker-compose.yml docker-compose.yml
     } || {
       echo -e "$RED--- app up ---> Ошибка! Cм.строку $LINENO скрипта $BASH_SOURCE$NORMAL"
       return
@@ -110,6 +110,7 @@ func_wrapper_up () {
       # 1] Проставить пути в docker-compose.yml
       echo -en "$YELLOW--- app up ---> -- docker-compose.yml ...$NORMAL"
       sed -i -e "s#<path_to_the_project>#$project_path#g" docker-compose.yml
+      sed -i -e "s#<name_of_configs_group>#$configs_group#g" docker-compose.yml
       echo -e "$GREEN Успех! $NORMAL"
 
       # 2] Проставить пути в configs/active/nginx/sites/project.app
